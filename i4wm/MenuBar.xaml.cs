@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WindowsDesktop;
 
 namespace i4wm
 {
@@ -29,11 +19,28 @@ namespace i4wm
         {
             base.OnActivated(e);
 
-            Top = 0;
-            Left = 0;
+            int desktopCount = i4wm.VirtualDesktop.Desktop.Count;
+            Grid buttonGrid = new Grid();
+
+            for (int i = 0; i < desktopCount; i++)
+            {
+                Button button = new Button();
+                button.HorizontalAlignment = HorizontalAlignment.Left;
+                button.VerticalAlignment = VerticalAlignment.Center;
+                button.Height = 25;
+                button.Width = 25;
+                button.Content = "1";
+                button.BorderThickness = new Thickness(0);
+
+                button.Click += buttonClick;
+
+                buttonGrid.Children.Add(button);
+            }
+
+            AddVisualChild(buttonGrid);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void buttonClick(object sender, RoutedEventArgs e)
         {
 
         }
