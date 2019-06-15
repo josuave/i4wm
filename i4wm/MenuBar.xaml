@@ -15,4 +15,5 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Topmost="True">
+    <StackPanel x:Name="sp_main" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Orientation="Horizontal" Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}"/>
 </Window>

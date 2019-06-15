@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using WindowsDesktop;
+using System.Windows.Media;
 
 namespace i4wm
 {
@@ -10,17 +10,11 @@ namespace i4wm
     /// </summary>
     public partial class MenuBar : Window
     {
+        int desktopCount = VirtualDesktop.Desktop.Count;
+
         public MenuBar()
         {
             InitializeComponent();
-        }
-
-        protected override void OnActivated(EventArgs e)
-        {
-            base.OnActivated(e);
-
-            int desktopCount = i4wm.VirtualDesktop.Desktop.Count;
-            Grid buttonGrid = new Grid();
 
             for (int i = 0; i < desktopCount; i++)
             {
@@ -29,20 +23,34 @@ namespace i4wm
                 button.VerticalAlignment = VerticalAlignment.Center;
                 button.Height = 25;
                 button.Width = 25;
-                button.Content = "1";
+                button.Content = i + 1;
                 button.BorderThickness = new Thickness(0);
+                button.Background = Brushes.Transparent;
+
+                var current = VirtualDesktop.Desktop.Current.ToString();
+                if (i.ToString() == current)
+                {
+                    button.Background = Brushes.Red;
+                }
 
                 button.Click += buttonClick;
 
-                buttonGrid.Children.Add(button);
+                sp_main.Children.Add(button);
             }
-
-            AddVisualChild(buttonGrid);
         }
 
         private void buttonClick(object sender, RoutedEventArgs e)
         {
+            Button clicked = sender as Button;
+            foreach(Button button in sp_main.Children)
+            {
+                button.Background = Brushes.Transparent;
+            }
+            clicked.Background = Brushes.Red;
+            var index = int.Parse(clicked.Content.ToString()) - 1;
 
+            VirtualDesktop.Desktop.PinWindow(VirtualDesktop.Desktop.GetForegroundWindow());
+            VirtualDesktop.Desktop.FromIndex(index).MakeVisible();
         }
     }
 }
