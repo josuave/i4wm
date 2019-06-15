@@ -24,5 +24,18 @@ namespace i4wm
         {
             InitializeComponent();
         }
+
+        protected override void OnActivated(EventArgs e)
+        {
+            base.OnActivated(e);
+
+            Top = 0;
+            Left = 0;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

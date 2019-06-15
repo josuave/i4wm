@@ -7,14 +7,17 @@
         mc:Ignorable="d"
         
         Title="MenuBar"
-        Width="{DynamicResource {x:Static SystemParameters.MaximizedPrimaryScreenWidthKey}}"
+        Width="{DynamicResource {x:Static SystemParameters.FullPrimaryScreenWidthKey}}"
         Height="25"
         Top="0"
-        BorderThickness="0" WindowStyle="None"
->
-    <Button Content="1" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="25" Margin="-4,-4,0,-4" Click="Button_Click" BorderThickness="0">
+        BorderThickness="0"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Topmost="True">
+    
+    <Button Content="1" HorizontalAlignment="Left" Height="25" VerticalAlignment="Center" Width="25" Margin="-4,-4,0,-4" Click="Button_Click" BorderThickness="0">
         <Button.Background>
-            <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}" Opacity="0"/>
+            <SolidColorBrush Opacity="0"/>
         </Button.Background>
     </Button>
 
